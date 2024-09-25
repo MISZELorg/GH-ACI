@@ -1,7 +1,7 @@
-# base image
+# Base image
 FROM ubuntu:24.04
 
-# input GitHub runner version argument
+# Input GitHub runner version argument
 ARG RUNNER_VERSION
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -36,8 +36,8 @@ RUN tar xzf /home/docker/actions-runner/actions-runner-linux-x64-${RUNNER_VERSIO
 RUN chown -R docker /home/docker && \
     /home/docker/actions-runner/bin/installdependencies.sh
 
-# Copy over the start.sh script
-COPY scripts/start2.sh /home/docker/start2.sh
+# Ensure the scripts directory exists and copy the start2.sh script
+COPY ./scripts/start2.sh /home/docker/start2.sh
 
 # Convert line endings of start.sh and make it executable
 RUN dos2unix /home/docker/start2.sh && \
